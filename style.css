@@ -16,6 +16,11 @@ sky blue and steel grey.
     --text: #16222e;
     --muted: #566677;
 
+    /* Gold accent: the premium touch against the navy and blue */
+    --gold: #d4af6a;
+    --gold-deep: #a97e2f;
+    --gold-glow: rgba(212, 175, 106, 0.35);
+
     --serif: "Fraunces", "Times New Roman", Georgia, serif;
     --sans: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
@@ -93,6 +98,31 @@ h1, h2, h3, p {
     margin-inline: auto;
 }
 
+/* Small gold label placed above a heading */
+
+.kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 1rem;
+    color: var(--gold);
+    font: 700 0.8rem/1 var(--sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.kicker::before {
+    content: "";
+    width: 1.75rem;
+    height: 2px;
+    background: var(--gold);
+}
+
+.section--ink .kicker,
+.hero .kicker {
+    color: var(--gold);
+}
+
 /* Icons (inline SVG sprite) */
 
 .i {
@@ -126,12 +156,14 @@ BUTTONS
 }
 
 .btn--sky {
-    background: var(--sky);
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
     color: var(--ink);
+    box-shadow: 0 10px 24px -10px var(--gold-glow);
 }
 
 .btn--sky:hover {
     background: #fff;
+    box-shadow: 0 10px 24px -10px rgba(255, 255, 255, 0.35);
 }
 
 .btn--ghost {
@@ -142,7 +174,8 @@ BUTTONS
 
 .btn--ghost:hover {
     background: rgba(255, 255, 255, 0.12);
-    border-color: #fff;
+    border-color: var(--gold);
+    color: var(--gold);
 }
 
 .btn--brand {
@@ -213,6 +246,7 @@ HEADER
     width: 44px;
     height: 44px;
     border-radius: 50%;
+    border: 1.5px solid var(--gold);
 }
 
 .brand__name {
@@ -326,12 +360,18 @@ HERO
     position: absolute;
     inset: 0;
     z-index: -2;
-    background: linear-gradient(
-        180deg,
-        rgba(11, 27, 43, 0.6) 0%,
-        rgba(11, 27, 43, 0.2) 40%,
-        rgba(11, 27, 43, 0.94) 100%
-    );
+    background:
+        radial-gradient(
+            60% 50% at 82% 28%,
+            rgba(212, 175, 106, 0.16) 0%,
+            rgba(212, 175, 106, 0) 70%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(11, 27, 43, 0.6) 0%,
+            rgba(11, 27, 43, 0.2) 40%,
+            rgba(11, 27, 43, 0.94) 100%
+        );
 }
 
 /* Line drawing that echoes the roof and ring of the logo */
@@ -350,12 +390,12 @@ HERO
 }
 
 .hero__art .ring {
-    stroke: var(--sky);
+    stroke: var(--gold);
     stroke-width: 2;
 }
 
 .hero__art .roof-a {
-    stroke: var(--sky);
+    stroke: var(--gold);
     stroke-width: 3.5;
 }
 
@@ -387,13 +427,18 @@ HERO
 }
 
 .hero__title {
-    max-width: 11ch;
+    max-width: 14ch;
     margin: 0 0 1.5rem;
     font-family: var(--serif);
     font-weight: 300;
     font-size: clamp(2.9rem, 8.2vw, 6.4rem);
     line-height: 1;
     letter-spacing: -0.02em;
+}
+
+.hero__title em {
+    color: var(--gold);
+    font-style: normal;
 }
 
 .hero__lead {
@@ -409,6 +454,7 @@ HERO
     gap: 0.85rem;
 }
 
+.hero .kicker,
 .hero__title,
 .hero__lead,
 .hero__actions {
@@ -417,6 +463,7 @@ HERO
     animation: rise 0.9s ease forwards;
 }
 
+.hero .kicker { animation-delay: 0s; }
 .hero__title { animation-delay: 0.15s; }
 .hero__lead { animation-delay: 0.45s; }
 .hero__actions { animation-delay: 0.7s; }
@@ -445,6 +492,12 @@ HERO
     align-items: center;
     gap: 0.5rem;
     margin: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.hero__foot .i {
+    flex-shrink: 0;
 }
 
 .hero__featured {
@@ -556,8 +609,8 @@ PROPERTY FILTERS + GRID
 
 .chip[aria-pressed="true"] {
     background: var(--ink);
-    border-color: var(--ink);
-    color: #fff;
+    border-color: var(--gold);
+    color: var(--gold);
 }
 
 .filters__tools {
@@ -673,7 +726,7 @@ PROPERTY FILTERS + GRID
     font-family: var(--serif);
     font-size: 1.55rem;
     font-weight: 500;
-    color: var(--ink);
+    color: var(--gold-deep);
 }
 
 .card__title {
@@ -871,7 +924,15 @@ SMART LIVING
     width: 1.9rem;
     height: 1.9rem;
     margin-bottom: 1rem;
-    color: var(--sky);
+    color: var(--gold);
+}
+
+.feature {
+    transition: border-color 0.25s;
+}
+
+.feature:hover {
+    border-top-color: var(--gold);
 }
 
 .feature h3 {
@@ -946,8 +1007,9 @@ VIDEOS
     height: 4.25rem;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    background: var(--sky);
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
     color: var(--ink);
+    box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.5);
 }
 
 .video__play .i {
@@ -1017,7 +1079,13 @@ CONTACT + INSPECTION
     width: 1.5rem;
     height: 1.5rem;
     margin-top: 0.15rem;
-    color: var(--brand);
+    flex-shrink: 0;
+    color: var(--gold-deep);
+}
+
+.contact__item > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .contact__label {
@@ -1028,6 +1096,7 @@ CONTACT + INSPECTION
 
 .contact__item a,
 .contact__item span.value {
+    display: inline-block;
     color: var(--ink);
     font-weight: 600;
     text-decoration: none;
@@ -1133,6 +1202,7 @@ FOOTER + FLOATING WHATSAPP
     width: 56px;
     height: 56px;
     border-radius: 50%;
+    border: 1.5px solid var(--gold);
 }
 
 .footer__brand strong {
@@ -1140,6 +1210,13 @@ FOOTER + FLOATING WHATSAPP
     font-family: var(--serif);
     font-size: 1.2rem;
     font-weight: 600;
+}
+
+.footer__brand span {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--gold);
+    font-size: 0.9rem;
 }
 
 .footer__links {
@@ -1407,7 +1484,7 @@ PROPERTY DETAIL MODAL
     margin: 0 0 0.75rem;
     font-family: var(--serif);
     font-size: 1.7rem;
-    color: var(--brand);
+    color: var(--gold-deep);
 }
 
 .modal__loc {
@@ -1626,14 +1703,243 @@ ADDITIONS: scroll animation, video window, active link
 
 .nav a.is-active:not(.btn) {
     color: #fff;
-    box-shadow: 0 2px 0 var(--sky);
+    box-shadow: 0 2px 0 var(--gold);
 }
 
 @media (max-width: 900px) {
 
     .nav a.is-active:not(.btn) {
         box-shadow: none;
-        color: var(--sky);
+        color: var(--gold);
+    }
+
+}
+
+/* Gold divider under the roofline drawing */
+
+.about__logo {
+    border: 3px solid var(--gold);
+}
+
+
+/* =====================================================
+PREMIUM UPGRADE
+Times New Roman throughout, a gold accent for a more
+upscale feel, bigger logo, colored icons, more generous
+padding, and centered section text.
+===================================================== */
+
+:root {
+
+    --serif: "Times New Roman", Times, Georgia, serif;
+    --sans: "Times New Roman", Times, Georgia, serif;
+
+    --gold: #c9a227;
+    --gold-2: #a3811c;
+
+    --header-h: 84px;
+
+}
+
+
+/* Bigger, framed logo */
+
+.brand {
+    gap: 1rem;
+}
+
+.brand img {
+    width: 64px;
+    height: 64px;
+    border: 2px solid var(--gold);
+    padding: 2px;
+    background: #fff;
+}
+
+.brand__name {
+    font-size: 1.3rem;
+}
+
+.footer__brand img {
+    width: 84px;
+    height: 84px;
+    border: 2px solid var(--gold);
+    padding: 2px;
+    background: #fff;
+}
+
+.footer__brand strong {
+    font-size: 1.35rem;
+}
+
+
+/* Gold accent on buttons, chips and highlights */
+
+.btn {
+    padding: 1.05rem 1.9rem;
+    letter-spacing: 0.01em;
+}
+
+.btn--sky {
+    background: var(--gold);
+    color: #1a1400;
+}
+
+.btn--sky:hover {
+    background: #fff;
+    color: #1a1400;
+}
+
+.btn--brand {
+    background: var(--gold);
+    color: #1a1400;
+}
+
+.btn--brand:hover {
+    background: var(--gold-2);
+    color: #fff;
+}
+
+.nav .btn {
+    color: #1a1400;
+}
+
+.chip[aria-pressed="true"] {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #1a1400;
+}
+
+.card__price,
+.modal__price {
+    color: var(--gold-2);
+}
+
+.hero__art .ring {
+    stroke: var(--gold);
+}
+
+.video__play {
+    background: var(--gold);
+    color: #1a1400;
+}
+
+.project__status::before {
+    background: var(--dot, var(--gold));
+}
+
+
+/* Colored icon circles instead of plain black glyphs */
+
+.contact__item .i {
+    padding: 0.6rem;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #1a1400;
+}
+
+.feature .i {
+    padding: 0.7rem;
+    border-radius: 50%;
+    background: rgba(201, 162, 39, 0.16);
+    color: var(--gold);
+}
+
+.card__loc .i,
+.card__facts .i,
+.modal__loc .i,
+.modal__facts .i,
+.project__loc .i {
+    color: var(--gold-2);
+}
+
+
+/* More generous spacing */
+
+.wrap {
+    width: min(1180px, 100% - 4rem);
+}
+
+.section {
+    padding-block: clamp(5.5rem, 11vw, 9rem);
+}
+
+.hero__inner {
+    padding-block: clamp(4rem, 12vh, 8rem) 3.5rem;
+}
+
+.section__head {
+    margin-bottom: 3.5rem;
+}
+
+.form {
+    padding: clamp(2rem, 4vw, 3rem);
+}
+
+.contact__list {
+    gap: 1.6rem;
+}
+
+.card__body {
+    padding-top: 1.4rem;
+}
+
+.feature {
+    padding: 2rem 0 2.5rem;
+}
+
+
+/* Center the section introductions and a few text blocks */
+
+.section__head {
+    justify-content: center;
+    text-align: center;
+}
+
+.section__head > div {
+    margin-inline: auto;
+}
+
+.section__lead {
+    margin-inline: auto;
+}
+
+.about {
+    text-align: center;
+}
+
+.about p,
+.about .btn {
+    margin-inline: auto;
+}
+
+.feature {
+    text-align: center;
+}
+
+.feature .i {
+    margin-inline: auto;
+    margin-bottom: 1.1rem;
+}
+
+.form h3,
+.form__intro {
+    text-align: center;
+}
+
+.video-title {
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+
+    .about,
+    .contact {
+        text-align: center;
+    }
+
+    .contact__list {
+        text-align: left;
     }
 
 }
